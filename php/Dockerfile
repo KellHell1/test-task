@@ -9,8 +9,10 @@ RUN apt update \
     && docker-php-ext-install zip
 
 WORKDIR /var/www
+COPY composer.json /var/www
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN composer install --no-interaction
 
 RUN curl -sS https://get.symfony.com/cli/installer | bash
 RUN mv /root/.symfony5/bin/symfony /usr/local/bin/symfony

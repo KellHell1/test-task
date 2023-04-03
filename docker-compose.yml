@@ -17,11 +17,10 @@ services:
   php:
     container_name: php
     build:
-      context: ./php
+      context: .
+      dockerfile: ./php/Dockerfile
     ports:
       - '9000:9000'
-    volumes:
-      - .:/var/www
     depends_on:
       - database
   nginx:

@@ -4,6 +4,59 @@
     <meta charset="UTF-8">
     <title>{% block title %}Main{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            margin-top: 0;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select {
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .response {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f2f2f2;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+    </style>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
     {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
@@ -11,26 +64,25 @@
 
 <body>
 
-  <div id="app">
+<div class="container" id="app">
     <form @submit.prevent="handleSubmit">
-      <label for="weight">Weight:</label>
-      <input type="text" id="weight" v-model="weight" required>
+        <h2>Shipping Cost Calculator</h2>
+        <label for="weight">Weight:</label>
+        <input type="text" id="weight" v-model="weight" required>
 
-      <label for="carrierSlug">Carrier Slug:</label>
-      <select id="carrierSlug" v-model="carrierSlug" required>
-        <option v-for="option in carrierSlugOptions" :value="option">${ option }$</option>
-      </select>
+        <label for="carrierSlug">Carrier Slug:</label>
+        <select id="carrierSlug" v-model="carrierSlug" required>
+            <option v-for="option in carrierSlugOptions" :value="option">${ option }$</option>
+        </select>
 
-      <button type="submit">Submit</button>
+        <button type="submit">Submit</button>
     </form>
 
-    <div v-if="response">
-      <h2>Response:</h2>
-      <pre>${ JSON.stringify(data) }$</pre>
+    <div v-if="response" class="response">
+        <pre>${ response }$</pre>
     </div>
-  </div>
+</div>
 
-  <script src="app.js"></script>
 
 </body>
 

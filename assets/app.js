@@ -22,17 +22,16 @@ new Vue({
     },
     delimiters: ['${', '}$'],
     methods: {
-      handleSubmit() {
-        const url = `http://localhost:8081/calculate-shipping-cost/${this.weight}/${this.carrierSlug}`;
-  
-        fetch(url)
-          .then(response => response.json())
-          .then(data => {
-            this.response = data.cost;
-          })
-          .catch(error => {
-            console.error('Error:', error);
-          });
-      },
+        handleSubmit() {
+            const url = `http://localhost:8081/calculate-shipping-cost/${this.weight}/${this.carrierSlug}`;
+
+            axios.get(url)
+                .then(response => {
+                    this.response = response.data;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        },
     },
   });

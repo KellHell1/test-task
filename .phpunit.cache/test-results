@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"ShippingControllerTest::testCalculateShippingCostWithValidCarrierSlugTransCompany":0.004,"ShippingControllerTest::testCalculateShippingCostWithValidCarrierSlugPackGroupCompany":0,"ShippingControllerTest::testCalculateShippingCostWithInvalidCarrierSlug":0}}

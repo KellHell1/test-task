@@ -10,3 +10,29 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+import Vue from "vue";
+
+new Vue({
+    el: '#app',
+    data: {
+      weight: '',
+      carrierSlug: '',
+      response: null,
+      carrierSlugOptions: ['trans-company', 'pack-group'],
+    },
+    delimiters: ['${', '}$'],
+    methods: {
+      handleSubmit() {
+        const url = `http://localhost:8081/calculate-shipping-cost/${this.weight}/${this.carrierSlug}`;
+  
+        fetch(url)
+          .then(response => response.json())
+          .then(data => {
+            this.response = data.cost;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+      },
+    },
+  });

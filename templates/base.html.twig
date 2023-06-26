@@ -1,15 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html lang="">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Forms{% endblock %}</title>
+    <title>{% block title %}Main{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% block stylesheets %} {{ encore_entry_link_tags('app') }} {% endblock %}
-    {% block javasripts %} {{ encore_entry_link_tags('app') }} {% endblock %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
+    {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %}
 </head>
 
 <body>
-<h2>Hello world</h2>
+
+  <div id="app">
+    <form @submit.prevent="handleSubmit">
+      <label for="weight">Weight:</label>
+      <input type="text" id="weight" v-model="weight" required>
+
+      <label for="carrierSlug">Carrier Slug:</label>
+      <select id="carrierSlug" v-model="carrierSlug" required>
+        <option v-for="option in carrierSlugOptions" :value="option">${ option }$</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+
+    <div v-if="response">
+      <h2>Response:</h2>
+      <pre>${ JSON.stringify(data) }$</pre>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+
 </body>
 
 </html>
